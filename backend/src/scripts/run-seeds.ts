@@ -3,7 +3,7 @@ import path from 'path';
 import sequelize from '../models';
 
 async function run() {
-  const seedsDir = path.resolve(__dirname, '..', '..', 'seeders');
+  const seedsDir = path.resolve(__dirname, '..', '..', 'src','seeders');
   const files = fs.readdirSync(seedsDir).filter(f => f.endsWith('.sql')).sort();
 
   try {

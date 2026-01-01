@@ -1,3 +1,5 @@
+import { ThemeProvider } from "next-themes";
+import { MainLayout } from "./components/layout/MainLayout";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,29 +22,33 @@ import Logout from "./pages/Logout";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<RequireAuth><Index /></RequireAuth>} />
-          <Route path="/sucursales" element={<RequireAuth><Sucursales /></RequireAuth>} />
-          <Route path="/planes" element={<RequireAuth><Planes /></RequireAuth>} />
-          <Route path="/clientes" element={<RequireAuth><Clientes /></RequireAuth>} />
-          <Route path="/clases" element={<RequireAuth><Clases /></RequireAuth>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profesores" element={<RequireAuth><Profesores /></RequireAuth>} />
-          <Route path="/crm" element={<RequireAuth><Crm /></RequireAuth>} />
-          <Route path="/reportes" element={<RequireAuth><Reportes /></RequireAuth>} />
-          <Route path="/configuracion" element={<RequireAuth><Configuracion /></RequireAuth>} />
-          <Route path="/logout" element={<Logout />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<RequireAuth><MainLayout /></RequireAuth>}>
+              <Route path="/" element={<Index />} />
+              <Route path="/sucursales" element={<Sucursales />} />
+              <Route path="/planes" element={<Planes />} />
+              <Route path="/clientes" element={<Clientes />} />
+              <Route path="/clases" element={<Clases />} />
+              <Route path="/profesores" element={<Profesores />} />
+              <Route path="/crm" element={<Crm />} />
+              <Route path="/reportes" element={<Reportes />} />
+              <Route path="/configuracion" element={<Configuracion />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

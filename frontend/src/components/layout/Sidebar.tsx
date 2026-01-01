@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Building2,
@@ -10,11 +10,11 @@ import {
   MessageSquare,
   BarChart3,
   Settings,
-  Dumbbell,
+  PersonStanding,
   ChevronLeft,
   LogOut,
 } from "lucide-react";
-import { useState } from "react";
+
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -28,9 +28,14 @@ const navigation = [
   { name: "Configuración", href: "/configuracion", icon: Settings },
 ];
 
-export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+interface SidebarProps {
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
+}
+
+export function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <aside
@@ -42,11 +47,11 @@ export function Sidebar() {
       {/* Logo */}
       <div className="flex h-16 items-center justify-between px-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary glow-effect">
-            <Dumbbell className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <PersonStanding className="h-5 w-5" />
           </div>
           {!collapsed && (
-            <span className="font-bold text-lg gradient-text">FitPro</span>
+            <span className="font-semibold text-lg text-foreground">FitPro</span>
           )}
         </div>
         <button
@@ -73,21 +78,18 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
                 isActive
-                  ? "bg-primary/10 text-primary"
+                  ? "text-primary"
                   : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
               )}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5 flex-shrink-0 transition-colors",
-                  isActive && "text-primary"
+                  isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
                 )}
               />
               {!collapsed && (
-                <span className="font-medium text-sm">{item.name}</span>
-              )}
-              {isActive && !collapsed && (
-                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className={cn("font-medium text-sm", isActive && "font-semibold")}>{item.name}</span>
               )}
             </NavLink>
           );
@@ -98,7 +100,7 @@ export function Sidebar() {
       <div className="p-3 border-t border-sidebar-border">
         <div
           className={cn(
-            "flex items-center gap-3 p-3 rounded-lg bg-sidebar-accent/50",
+            "flex items-center gap-3 p-2 rounded-lg",
             collapsed && "justify-center"
           )}
         >
@@ -107,7 +109,7 @@ export function Sidebar() {
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">Admin User</p>
+              <p className="text-sm font-medium truncate text-foreground">Admin User</p>
               <p className="text-xs text-muted-foreground truncate">
                 admin@fitpro.cl
               </p>
@@ -115,12 +117,7 @@ export function Sidebar() {
           )}
           {!collapsed && (
             <button
-              onClick={() => {
-                // navigate to logout
-                const nav = document.createElement('a');
-                nav.href = '/logout';
-                nav.click();
-              }}
+              onClick={() => navigate('/logout')}
               className="p-1.5 rounded-lg hover:bg-sidebar-accent transition-colors"
             >
               <LogOut className="h-4 w-4 text-muted-foreground" />

@@ -21,6 +21,7 @@ create table role_permissions (
 create table users (
   id bigint primary key generated always as identity,
   email text not null unique,
+  password text not null,
   name text,
   role_id bigint references roles (id),
   created_at timestamp with time zone default now()

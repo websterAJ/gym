@@ -31,7 +31,11 @@ export default function initAssociations() {
 
   // Role -> Users
   Role.hasMany(User, { foreignKey: 'role_id' });
-  User.belongsTo(Role, { foreignKey: 'role_id' });
+  User.belongsTo(Role, { foreignKey: 'role_id', as: 'role' });
+
+  // Customer -> User
+  Customer.belongsTo(User, { foreignKey: 'user_id' });
+  User.hasMany(Customer, { foreignKey: 'user_id' });
 
   // Users (instructors) -> Classes
   User.hasMany(GymClass, { foreignKey: 'instructor_id' });
@@ -101,6 +105,10 @@ export default function initAssociations() {
   Invoice.belongsTo(Customer, { foreignKey: 'customer_id' });
   Subscription.hasMany(Invoice, { foreignKey: 'subscription_id' });
   Invoice.belongsTo(Subscription, { foreignKey: 'subscription_id' });
+
+  // Audit Logs
+  User.hasMany(AuditLog, { foreignKey: 'user_id' });
+  AuditLog.belongsTo(User, { foreignKey: 'user_id' });
 }
 
 // Run automatically when required

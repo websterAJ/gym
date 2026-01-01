@@ -6,63 +6,60 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* light background default */
-    --foreground: 210 20% 12%;
+    --background: 40 20% 98%; /* Off-white */
+    --foreground: 210 10% 23%; /* Dark muted grey */
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 20% 12%;
+    --card: 40 20% 100%;
+    --card-foreground: 210 10% 23%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 20% 12%;
+    --popover: 40 20% 100%;
+    --popover-foreground: 210 10% 23%;
 
-    /* Primary colors (P1) */
-    --primary: 186 63% 46%; /* #2CB1BF */
-    --primary-foreground: 0 0% 100%;
-    /* Primary: warm orange used for highlights / card accents */
-    --primary: 20 100% 60%; /* #FF914D */
+    /* Primary colors (Dusty Blue) */
+    --primary: 210 30% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary (teal) */
-    --secondary: 186 63% 46%; /* #2CB1BF */
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary (Sandy Beige) */
+    --secondary: 40 30% 92%;
+    --secondary-foreground: 210 10% 23%;
 
     /* Additional secondaries */
-    --s1: 22 77% 77%; /* #F2B999 (peach) */
-    --s2: 137 26% 70%; /* #9FC7AA (mint) */
-    --s3: 34 100% 96%; /* #FFF6EA (light peach) */
+    --s1: 30 40% 85%; /* Lighter beige */
+    --s2: 120 20% 88%; /* Sage green */
+    --s3: 40 30% 96%; /* Very light beige */
 
     --muted: 210 10% 85%;
-    --muted-foreground: 210 14% 30%;
+    --muted-foreground: 210 14% 40%;
 
-    --accent: var(--secondary);
-    --accent-foreground: var(--secondary-foreground);
+    --accent: 210 30% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 76% 45%;
+    --success: 140 60% 45%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 210 20% 12%;
 
-    --border: 210 12% 86%;
-    --input: 210 14% 94%;
-    --ring: var(--primary);
+    --border: 210 10% 88%;
+    --input: 210 10% 94%;
+    --ring: 210 30% 55%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 170 58% 97%; /* pale mint sidebar */
-    --sidebar-foreground: 210 20% 12%;
+    --sidebar-background: 40 30% 94%; /* Light Sandy Beige */
+    --sidebar-foreground: 210 10% 23%;
     --sidebar-primary: var(--primary);
     --sidebar-primary-foreground: var(--primary-foreground);
-    --sidebar-accent: var(--secondary);
-    --sidebar-accent-foreground: var(--secondary-foreground);
-    --sidebar-border: 210 12% 92%;
+    --sidebar-accent: 40 30% 88%; /* Darker Sandy Beige */
+    --sidebar-accent-foreground: 210 10% 23%;
+    --sidebar-border: 40 30% 85%;
     --sidebar-ring: var(--primary);
 
     /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--s1)) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--s2)) 100%);
     --gradient-card: linear-gradient(180deg, hsl(var(--s3)) 0%, hsl(var(--s1)) 100%);
     --gradient-glow: radial-gradient(circle at 50% 0%, color-mix(in srgb, hsl(var(--primary)) 15%, transparent) 0%, transparent 50%);
 
@@ -72,8 +69,42 @@
   }
 
   .dark {
-    --background: 210 30% 8%; /* deep navy */
-    --foreground: 210 40% 98%;
+    --background: 210 20% 10%;
+    --foreground: 210 10% 80%;
+
+    --card: 210 20% 12%;
+    --card-foreground: 210 10% 80%;
+
+    --popover: 210 20% 12%;
+    --popover-foreground: 210 10% 80%;
+
+    --primary: 210 30% 65%;
+    --primary-foreground: 210 20% 10%;
+
+    --secondary: 210 20% 18%;
+    --secondary-foreground: 210 10% 80%;
+
+    --muted: 210 20% 25%;
+    --muted-foreground: 210 10% 60%;
+
+    --accent: 210 30% 65%;
+    --accent-foreground: 210 20% 10%;
+    
+    --destructive: 0 50% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 20%;
+    --input: 210 20% 22%;
+    --ring: 210 30% 65%;
+
+    --sidebar-background: 210 20% 12%;
+    --sidebar-foreground: 210 10% 80%;
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: 210 20% 18%;
+    --sidebar-accent-foreground: 210 10% 80%;
+    --sidebar-border: 210 20% 20%;
+    --sidebar-ring: var(--primary);
   }
 }
 
@@ -85,35 +116,6 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Quicksand', 'Nunito', sans-serif;
-    position: relative;
-    min-height: 100vh;
-    /* Main gradient background (navy teal) */
-    background: linear-gradient(135deg, #192f40 0%, #1b3345 100%);
-    background-attachment: fixed;
-  }
-
-  /* Decorative gradient + subtle grain overlay */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    /* subtle colored overlay to tint the grain and add depth */
-    background: linear-gradient(120deg, rgba(25,47,64,0.18) 0%, rgba(27,51,69,0.18) 100%);
-    mix-blend-mode: overlay;
-  }
-
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='a'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23a)' fill='%23fff'/></svg>");
-    background-repeat: repeat;
-    mix-blend-mode: multiply;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -123,8 +125,8 @@
 
 @layer components {
   .glass-card {
-    background: hsl(var(--card) / 0.86);
-    @apply backdrop-blur-xl border border-border/50 rounded-xl;
+    background: hsl(var(--card));
+    @apply border border-border rounded-xl;
     box-shadow: var(--shadow-card);
   }
 
@@ -153,16 +155,7 @@
   }
 }
 
-/* Ensure the main layout background shows the decorative gradient even when components
-   use the `bg-background` utility (which maps to CSS var --background). This
-   overrides the dark-mode variable for the main container so the gradient is visible. */
-.min-h-screen.bg-background {
-  background: linear-gradient(135deg, #192f40 0%, #1b3345 100%) !important;
-}
 
-.dark .min-h-screen.bg-background {
-  background: linear-gradient(135deg, #192f40 0%, #1b3345 100%) !important;
-}
 
 @layer utilities {
   .animate-pulse-slow {

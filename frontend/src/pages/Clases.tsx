@@ -1,4 +1,3 @@
-import { MainLayout } from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -138,132 +137,130 @@ export default function Clases() {
   };
 
   return (
-    <MainLayout>
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Clases</h1>
-            <p className="text-muted-foreground mt-1">
-              Gestiona el calendario de clases y horarios
-            </p>
-          </div>
-          <Button className="gap-2">
-            <Plus className="h-4 w-4" />
-            Nueva Clase
-          </Button>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Clases</h1>
+          <p className="text-muted-foreground mt-1">
+            Gestiona el calendario de clases y horarios
+          </p>
         </div>
+        <Button className="gap-2">
+          <Plus className="h-4 w-4" />
+          Nueva Clase
+        </Button>
+      </div>
 
-        {/* Calendar Navigation */}
-        <div className="glass-card rounded-xl border border-border/50 p-4 animate-fade-in">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <h2 className="text-lg font-semibold">Enero 2024</h2>
-              <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm">
-                Hoy
-              </Button>
-              <Button variant="outline" size="sm">
-                Semana
-              </Button>
-              <Button variant="outline" size="sm">
-                Mes
-              </Button>
-            </div>
+      {/* Calendar Navigation */}
+      <div className="glass-card rounded-xl border border-border/50 p-4 animate-fade-in">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <h2 className="text-lg font-semibold">Enero 2024</h2>
+            <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
-
-          {/* Days of Week */}
-          <div className="grid grid-cols-7 gap-2 mb-4">
-            {diasSemana.map((dia, index) => (
-              <button
-                key={dia}
-                onClick={() => setSelectedDay(index)}
-                className={cn(
-                  "p-3 rounded-lg text-center transition-all",
-                  selectedDay === index
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-secondary"
-                )}
-              >
-                <p className="text-xs text-muted-foreground mb-1">{dia}</p>
-                <p className="text-lg font-semibold">{15 + index}</p>
-              </button>
-            ))}
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm">
+              Hoy
+            </Button>
+            <Button variant="outline" size="sm">
+              Semana
+            </Button>
+            <Button variant="outline" size="sm">
+              Mes
+            </Button>
           </div>
         </div>
 
-        {/* Schedule Grid */}
-        <div className="glass-card rounded-xl border border-border/50 overflow-hidden animate-fade-in">
-          <div className="divide-y divide-border/50">
-            {horas.map((hora) => {
-              const clasesEnHora = getClasesPorHora(hora);
-              return (
-                <div key={hora} className="flex">
-                  <div className="w-20 p-4 border-r border-border/50 flex-shrink-0">
-                    <span className="text-sm text-muted-foreground">{hora}</span>
-                  </div>
-                  <div className="flex-1 p-2 min-h-[80px]">
-                    {clasesEnHora.length > 0 ? (
-                      <div className="flex gap-2 flex-wrap">
-                        {clasesEnHora.map((clase) => (
-                          <div
-                            key={clase.id}
-                            className={cn(
-                              "flex-1 min-w-[200px] p-3 rounded-lg border border-border/50 hover:border-border transition-colors cursor-pointer group",
-                              "bg-secondary/30"
-                            )}
-                          >
-                            <div className="flex items-start gap-3">
-                              <div
-                                className={cn(
-                                  "w-1 h-12 rounded-full flex-shrink-0",
-                                  clase.color
-                                )}
-                              />
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-sm">
-                                  {clase.name}
-                                </h4>
-                                <p className="text-xs text-muted-foreground">
-                                  {clase.instructor}
-                                </p>
-                                <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                                  <div className="flex items-center gap-1">
-                                    <Clock className="h-3 w-3" />
-                                    {clase.duracion} min
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <Users className="h-3 w-3" />
-                                    <span
-                                      className={cn(
-                                        clase.enrolled === clase.capacity &&
-                                          "text-warning"
-                                      )}
-                                    >
-                                      {clase.enrolled}/{clase.capacity}
-                                    </span>
-                                  </div>
+        {/* Days of Week */}
+        <div className="grid grid-cols-7 gap-2 mb-4">
+          {diasSemana.map((dia, index) => (
+            <button
+              key={dia}
+              onClick={() => setSelectedDay(index)}
+              className={cn(
+                "p-3 rounded-lg text-center transition-all",
+                selectedDay === index
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-secondary"
+              )}
+            >
+              <p className="text-xs text-muted-foreground mb-1">{dia}</p>
+              <p className="text-lg font-semibold">{15 + index}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Schedule Grid */}
+      <div className="glass-card rounded-xl border border-border/50 overflow-hidden animate-fade-in">
+        <div className="divide-y divide-border/50">
+          {horas.map((hora) => {
+            const clasesEnHora = getClasesPorHora(hora);
+            return (
+              <div key={hora} className="flex">
+                <div className="w-20 p-4 border-r border-border/50 flex-shrink-0">
+                  <span className="text-sm text-muted-foreground">{hora}</span>
+                </div>
+                <div className="flex-1 p-2 min-h-[80px]">
+                  {clasesEnHora.length > 0 ? (
+                    <div className="flex gap-2 flex-wrap">
+                      {clasesEnHora.map((clase) => (
+                        <div
+                          key={clase.id}
+                          className={cn(
+                            "flex-1 min-w-[200px] p-3 rounded-lg border border-border/50 hover:border-border transition-colors cursor-pointer group",
+                            "bg-secondary/30"
+                          )}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div
+                              className={cn(
+                                "w-1 h-12 rounded-full flex-shrink-0",
+                                clase.color
+                              )}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-sm">
+                                {clase.name}
+                              </h4>
+                              <p className="text-xs text-muted-foreground">
+                                {clase.instructor}
+                              </p>
+                              <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                                <div className="flex items-center gap-1">
+                                  <Clock className="h-3 w-3" />
+                                  {clase.duracion} min
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <Users className="h-3 w-3" />
+                                  <span
+                                    className={cn(
+                                      clase.enrolled === clase.capacity &&
+                                        "text-warning"
+                                    )}
+                                  >
+                                    {clase.enrolled}/{clase.capacity}
+                                  </span>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </MainLayout>
+    </div>
   );
 }
